@@ -43,18 +43,8 @@ public class TodoController {
     }
 
     // TODO: 2023-01-26 정렬
-    public Page<TodoResponse> getAllAndSort(@PageableDefault(page = 0, size = 10) Pageable pageable) {
-        Page<TodoResponse> result = sortRepository
-                .finnAllByCreatedAt(
-                        LocalDateTime.parse("createdAt"),
-                        PageRequest.of(
-                                0,
-                                10,
-                                Sort.by(Sort.Order.desc("createdAt"))
-                        )
-                );
-
-        return result;
+    public Page<TodoResponse> getAllAndSort(@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, page = 10) Pageable pageable){
+        return todoService.getAll(pageable);
     }
 
     @ResponseStatus(code = HttpStatus.OK)
