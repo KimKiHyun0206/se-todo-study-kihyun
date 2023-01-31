@@ -43,6 +43,8 @@ public class TodoController {
     }
 
     // TODO: 2023-01-26 정렬
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping
     public Page<TodoResponse> getAllAndSort(@PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, page = 10) Pageable pageable){
         return todoService.getAll(pageable);
     }
